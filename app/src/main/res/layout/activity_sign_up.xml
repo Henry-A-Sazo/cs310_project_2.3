@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SignUp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,10 +19,6 @@
         android:gravity="center"
         >
 
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/phone_icon"/>-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,15 +47,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Please sign in"
+                android:text="Fill in Information"
                 android:textColor="@color/main_color"
                 android:textSize="32sp"
                 android:textStyle="bold"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Please enter your credentials"
-                android:alpha="0.7"/>
 
             <View
                 android:layout_width="wrap_content"
@@ -68,24 +59,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email"
-                android:alpha="0.7"
-                android:textStyle="bold"
-                android:textSize="20dp"/>/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"/>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password"
+                android:text="Name"
                 android:alpha="0.7"
                 android:textStyle="bold"
                 android:textSize="20dp"/>
@@ -94,19 +68,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"/>
-            <Button
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age"
+                android:alpha="0.7"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/signin"
-                android:layout_marginBottom="20dp"
-                android:text="Sign in"
-                android:textSize="30dp"/>
-            <Button
+                android:inputType="textEmailAddress"/>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Affiliation"
+                android:alpha="0.7"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/signup_btn"
+                android:inputType="textEmailAddress"/>
+
+            <Button
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sign__up_submit_btn"
                 android:layout_marginBottom="20dp"
-                android:text="Sign Up"
+                android:text="Submit"
                 android:textSize="30dp"/>
 
 
@@ -118,3 +119,4 @@
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
+
