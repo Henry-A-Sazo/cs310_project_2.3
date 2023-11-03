@@ -34,7 +34,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:cardCornerRadius="28dp"
         android:layout_marginBottom="-20dp"
         >
 
@@ -47,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fill in Information"
+                android:text="Sign Up"
                 android:textColor="@color/main_color"
                 android:textSize="32sp"
                 android:textStyle="bold"/>
@@ -67,7 +66,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"/>
+                android:id="@+id/name_input"/>
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"/>
@@ -83,7 +82,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"/>
+                android:id="@+id/age_input"/>
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"/>
@@ -91,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Affiliation"
+                android:text="Email"
                 android:alpha="0.7"
                 android:textStyle="bold"
                 android:textSize="20dp"/>
@@ -99,8 +98,40 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"/>
+                android:id="@+id/email_input"/>
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Native Speaker/International"
+                android:alpha="0.7"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/status_input"/>
+
+            <CheckBox
+                android:id="@+id/music_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Like Music" />
+            <CheckBox
+                android:id="@+id/books_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Like Reading" />
+            <CheckBox
+                android:id="@+id/sports_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Like Sports" />
             <Button
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
@@ -109,7 +140,6 @@
                 android:layout_marginBottom="20dp"
                 android:text="Submit"
                 android:textSize="30dp"/>
-
 
 
 
