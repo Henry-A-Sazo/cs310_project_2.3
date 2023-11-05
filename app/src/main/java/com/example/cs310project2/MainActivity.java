@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     public Button sign_up_btn;
+    public Button sign_in_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +25,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //For the sign in option
+        sign_in_btn = (Button) findViewById(R.id.signin);
+        sign_in_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHome();
+            }
+        });
+
     }
 
     //open the sign up screen
     public void openSignUp(){
         Intent intent = new Intent(this, SignUp.class);
+        startActivity(intent);
+    }
+
+    public void openHome(){
+        Intent intent = new Intent(this, home.class);
         startActivity(intent);
     }
 }

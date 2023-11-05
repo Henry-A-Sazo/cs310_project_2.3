@@ -117,26 +117,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/status_input"/>
 
-            <CheckBox
-                android:id="@+id/music_checkbox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Like Music" />
-            <CheckBox
-                android:id="@+id/books_checkbox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Like Reading" />
-            <CheckBox
-                android:id="@+id/sports_checkbox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Like Sports" />
             <Button
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/sign__up_submit_btn"
+                android:id="@+id/sign_up_submit_btn"
                 android:layout_marginBottom="20dp"
                 android:text="Submit"
                 android:textSize="30dp"/>
