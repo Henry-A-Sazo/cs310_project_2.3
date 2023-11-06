@@ -57,7 +57,7 @@ public class home extends AppCompatActivity {
     }
 
     public void openMeetings(){
-        Intent intent = new Intent(this, mettings.class);
+        Intent intent = new Intent(this, meetings.class);
         startActivity(intent);
     }
     public void openProfile(){

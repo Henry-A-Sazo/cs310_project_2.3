@@ -16,7 +16,7 @@
             android:name=".friends"
             android:exported="false" />
         <activity
-            android:name=".mettings"
+            android:name=".meetings"
             android:exported="false" />
         <activity
             android:name=".update"
