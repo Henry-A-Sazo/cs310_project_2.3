@@ -1,24 +1,17 @@
 package com.example.cs310project2;
 
-import android.content.Intent;
-import android.util.Log;
 import java.util.ArrayList;
 import java.lang.*;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DatabaseReference;
 
 
 public class meeting {
-
-    private FirebaseDatabase root;
-
     //basic information about the meeting
     public String host;
     private String location;
     private String time;
     private String topic;
     private ArrayList<String> members;
-    private String id;
+    private final String id;
 
     //Constructor
     meeting(/*String creator,*/ String oLocation, String oTime, String oTopic) {
@@ -28,9 +21,7 @@ public class meeting {
         topic = oTopic;
         members = new ArrayList<>();
         members.add(host);
-
-        //save the meeting on firebase and set the id
-        AddtoFireBase();
+        id = String.valueOf(System.currentTimeMillis());
     }
 
     //basic getters and functions for the meeting
@@ -49,9 +40,12 @@ public class meeting {
         return members;
     }
 
+    public String getID() {
+        return id;
+    }
+
     public void joinMeeting(String user) {
         members.add(user);
-        AddtoFireBase();
     }
 
     public void leaveMeeting(String user) {
@@ -61,7 +55,6 @@ public class meeting {
         } else if(user.equals(host)) {
             host = "";
         }
-        AddtoFireBase();
     }
 
     public void updateMeeting(String user, String newTime, String newLocation, String newTopic) {
@@ -75,28 +68,6 @@ public class meeting {
             if(!newTopic.equals("")) {
                 topic = newTopic;
             }
-
-            AddtoFireBase();
         }
-    }
-
-    private void AddtoFireBase() {
-        root = FirebaseDatabase.getInstance();
-
-
-        if(id == null || id.equals("")) { //create a nonce
-            id = String.valueOf(System.currentTimeMillis());
-        }
-        Log.d("create", "Test");
-        DatabaseReference meetingRef = root.getReference("meetings/" + id + "/host");
-        meetingRef.setValue(host);
-        meetingRef = root.getReference("meetings/" + id + "/location");
-        meetingRef.setValue(location);
-        meetingRef = root.getReference("meetings/" + id + "/time");
-        meetingRef.setValue(time);
-        meetingRef = root.getReference("meetings/" + id + "/topic");
-        meetingRef.setValue(topic);
-        meetingRef = root.getReference("meetings/" + id + "/members");
-        meetingRef.setValue(members);
     }
 }
