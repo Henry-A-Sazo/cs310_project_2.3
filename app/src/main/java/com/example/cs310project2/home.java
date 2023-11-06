@@ -1,5 +1,6 @@
 package com.example.cs310project2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,13 +9,23 @@ import android.view.View; // Add this import
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast; // Add this import
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class home extends AppCompatActivity {
 
+    public ArrayList<meeting> meetingsList;
     public Button friends_btn;
     public Button meetings_btn;
     public Button profile_btn;
@@ -24,11 +35,32 @@ public class home extends AppCompatActivity {
     public Button meeting3;
     public Button meeting4;
 
-
     ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //get all the meetings from the database
+        meetingsList = new ArrayList<>();
+        FirebaseDatabase root = FirebaseDatabase.getInstance();
+        DatabaseReference reference = root.getReference("meetings");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot meetingSnapshot : snapshot.getChildren()) {
+                    meeting m = meetingSnapshot.getValue(meeting.class);
+                    if (m != null) {
+                        meetingsList.add(m);
+                        TextView test = (TextView) findViewById(R.id.topic1);
+                        test.setText(m.getID());
+                        Log.d("create", "in Loop " + meetingsList.size());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -87,6 +119,7 @@ public class home extends AppCompatActivity {
                 meeting4_open();
             }
         });
+
     }
 
     public void openFriends(){

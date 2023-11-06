@@ -24,6 +24,16 @@ public class meeting {
         id = String.valueOf(System.currentTimeMillis());
     }
 
+    //default constructor necessary
+    meeting() {
+        host = "";
+        location = "";
+        time = "";
+        topic = "";
+        members = new ArrayList<>();
+        id = "";
+    }
+
     //basic getters and functions for the meeting
     public String getLocation() {
         return location;

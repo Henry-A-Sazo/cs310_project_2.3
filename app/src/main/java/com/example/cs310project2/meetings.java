@@ -43,7 +43,6 @@ public class meetings extends AppCompatActivity {
         EditText topicEditText = findViewById(R.id.topic_input);
         String topic = topicEditText.getText().toString();
         if(validateInfo(location, time, topic)) {
-            Log.d("create", "gjejfejge");
             meeting m = new meeting(location, time, topic);
             AddToDatabase(m);
             Intent intent = new Intent(this, home.class);
@@ -64,17 +63,7 @@ public class meetings extends AppCompatActivity {
 
     private void AddToDatabase(meeting m) {
         String id = m.getID();
-        Log.d("create", id);
-        reference = root.getReference("meetings/"+id+"/host");
-        reference.setValue(m.host);
-        reference = root.getReference("meetings/"+id+"/location");
-        reference.setValue(m.getLocation());
-        reference = root.getReference("meetings/"+id+"/time");
-        reference.setValue(m.getTime());
-        reference = root.getReference("meetings/"+id+"/topic");
-        reference.setValue(m.getTopic());
-        reference = root.getReference("meetings/"+id+"/members");
-        reference.setValue(m.getMembers());
-
+        reference = root.getReference("meetings/"+id);
+        reference.setValue(m);
     }
 }
