@@ -43,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openHome(){
+
+
+
+
         Intent intent = new Intent(this, home.class);
         startActivity(intent);
     }
