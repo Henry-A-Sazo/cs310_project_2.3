@@ -86,76 +86,63 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alex Gomez"
+                android:text="Topic 1"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
-            <TextView
+                android:textSize="30dp"/>
+            <Button
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:text="SAL 101, 3:30pm"
-                android:alpha="0.5"
-                android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:layout_height="55dp"
+                android:id="@+id/meeting_1"
+                android:text="Meeting Details"
+                android:textSize="30sp"
+                android:paddingBottom="5dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Siddarth Bansal"
+                android:text="Topic 2"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="30dp"/>
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:id="@+id/meeting_2"
+                android:layout_marginEnd="10dp"
+                android:text="Meeting Details"
+                android:textSize="30sp"
+                android:paddingBottom="5dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:text="GFS 101, 12:00pm"
-                android:alpha="0.5"
+                android:text="Topic 3"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="30dp"/>
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:id="@+id/meeting_3"
+                android:layout_marginEnd="10dp"
+                android:text="Meeting Details"
+                android:textSize="30sp"
+                android:paddingBottom="5dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Anthony Davis"
+                android:text="Topic 4"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
-            <TextView
+                android:textSize="30dp"/>
+            <Button
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:text="MHP 210, 10:00am"
-                android:alpha="0.5"
-                android:textStyle="bold"
-                android:textSize="20dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Emily Roberts"
-                android:textStyle="bold"
-                android:textSize="20dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:text="MHP 201, 7:00am"
-                android:alpha="0.5"
-                android:textStyle="bold"
-                android:textSize="20dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Christian Addei"
-                android:textStyle="bold"
-                android:textSize="20dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:text="zoomus://zoom.us/join?confno=8529015944pwd=uname=Christian%20Added"
-                android:alpha="0.5"
-                android:textStyle="bold"
-                android:textSize="20dp"/>
-
+                android:layout_height="55dp"
+                android:id="@+id/meeting_4"
+                android:layout_marginEnd="10dp"
+                android:text="Meeting Details"
+                android:textSize="30sp"
+                android:paddingBottom="5dp"/>
 
         </LinearLayout>
 
