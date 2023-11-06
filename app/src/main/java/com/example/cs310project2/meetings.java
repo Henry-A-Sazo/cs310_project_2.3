@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.os.Bundle;
 import android.widget.EditText;
 
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
 
 public class meetings extends AppCompatActivity {
 
@@ -46,8 +46,8 @@ public class meetings extends AppCompatActivity {
             Log.d("create", "gjejfejge");
             meeting m = new meeting(location, time, topic);
             AddToDatabase(m);
-            //Intent intent = new Intent(this, home.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, home.class);
+            startActivity(intent);
         } else {//meeting could not be created
 
         }
