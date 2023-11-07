@@ -56,7 +56,7 @@ public class home extends AppCompatActivity {
         //set the current user
         /*Intent intent = getIntent();
         String userName = intent.getStringExtra("user");*/
-        userName = "Test";
+        userName = "me";
 
         LinearLayout line = (LinearLayout) findViewById(R.id.line);
         //get all the meetings from the database
