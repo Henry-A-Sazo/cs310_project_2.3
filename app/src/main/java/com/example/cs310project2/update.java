@@ -56,6 +56,12 @@ public class update extends AppCompatActivity {
     }
 
     private void update_() {//save to database
+        EditText pass = findViewById(R.id.password_input);
+        String password = pass.getText().toString();
+        if (password == ""){
+            password = currUser.getPassword();
+        }
+
         EditText ageEditText = findViewById(R.id.age_input);
         String ageString = ageEditText.getText().toString();
         int age;
@@ -96,7 +102,7 @@ public class update extends AppCompatActivity {
         CheckBox sports_ = findViewById(R.id.music);
         Boolean likesSports = sports_.isChecked();
 
-        User temp = new User(currUser.getName(), age, currUser.getEmail(), type, currUser.getPassword(), likesMusic, likesReading, likesSports);
+        User temp = new User(currUser.getName(), age, currUser.getEmail(), type, password, likesMusic, likesReading, likesSports);
         reference.setValue(temp);
 
         Intent intent = new Intent(this, profile.class);
