@@ -133,6 +133,7 @@ public class home extends AppCompatActivity {
     }
     public void openProfile(){
         Intent intent = new Intent(this, profile.class);
+        intent.putExtra("user", "Test");
         startActivity(intent);
     }
 
