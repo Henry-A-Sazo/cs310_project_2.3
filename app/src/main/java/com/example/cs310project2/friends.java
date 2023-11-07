@@ -45,7 +45,6 @@ public class friends extends AppCompatActivity {
         FirebaseDatabase root = FirebaseDatabase.getInstance();
         DatabaseReference reference = root.getReference("meetings");
         Context context = this;
-        int count = 0;
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -84,7 +83,7 @@ public class friends extends AppCompatActivity {
                         btn.setHeight(45);
                         btn.setText("ADD");
                         btn.setTextSize(20);
-                        btn.setTextColor(Color.BLACK);
+                        btn.setTextColor(Color.WHITE);
                         btn.setPadding(10, 0, 10, 5);
                         layoutParams.setMargins(10, 0, 10, 0); // Left, Top, Right, Bottom
 
@@ -93,14 +92,14 @@ public class friends extends AppCompatActivity {
 
                         // Adding the buttons
                         Button btn2 = new Button(context);
-                        btn.setLayoutParams(new LinearLayout.LayoutParams(
+                        btn2.setLayoutParams(new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         ));
                         btn2.setHeight(45);
                         btn2.setText("DEL");
                         btn2.setTextSize(20);
-                        btn2.setTextColor(Color.BLACK);
+                        btn2.setTextColor(Color.WHITE);
                         btn2.setPadding(10, 0, 10, 5);
                         layoutParams.setMargins(10, 0, 10, 0); // Left, Top, Right, Bottom
 
@@ -131,23 +130,35 @@ public class friends extends AppCompatActivity {
 
                     }
                 }
+                // Adding the buttons
+                Button btn_i = new Button(context);
+                btn_i.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                btn_i.setHeight(45);
+                btn_i.setText("Invite Friends");
+                btn_i.setTextSize(20);
+                btn_i.setTextColor(Color.WHITE);
+                btn_i.setPadding(10, 0, 10, 5);
+
+                ColorStateList colorStateList2 = ColorStateList.valueOf(getResources().getColor(R.color.main_color));
+                btn_i.setBackgroundTintList(colorStateList2);
+
+                // Set an OnClickListener for the button
+                btn_i.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        invitation();
+                    }
+                });
+                line.addView(btn_i);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -159,21 +170,6 @@ public class friends extends AppCompatActivity {
             }
         });
 
-        profile_btn = (Button) findViewById(R.id.profile_btn);
-        profile_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openProfile();
-            }
-        });
-
-//        invite_btn = (Button) findViewById(R.id.invite_fr);
-//        invite_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                invitation();
-//            }
-//        });
     }
 
 
