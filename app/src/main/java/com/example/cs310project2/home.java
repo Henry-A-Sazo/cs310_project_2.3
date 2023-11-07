@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View; // Add this import
@@ -73,6 +74,7 @@ public class home extends AppCompatActivity {
                                 LinearLayout.LayoutParams.MATCH_PARENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT));
                         tv.setText(m.getTopic());
+                        tv.setTypeface(null, Typeface.BOLD);
 
                         // Add the TextView to the LinearLayout
                         line.addView(tv);
