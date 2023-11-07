@@ -93,11 +93,13 @@ public class profile extends AppCompatActivity {
 
     public void openFriends(){
         Intent intent = new Intent(this, friends.class);
+        intent.putExtra("user", currUser.getEmail());
         startActivity(intent);
     }
 
     public void openMeetings(){
         Intent intent = new Intent(this, home.class);
+        intent.putExtra("user", currUser.getEmail());
         startActivity(intent);
     }
 }
