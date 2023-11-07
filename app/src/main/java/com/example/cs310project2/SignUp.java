@@ -11,6 +11,8 @@ import android.widget.EditText;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 
+
+
 public class SignUp extends AppCompatActivity {
 
     private FirebaseDatabase root;
@@ -18,7 +20,7 @@ public class SignUp extends AppCompatActivity {
 
     public Button submit_btn;
 
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -37,28 +39,35 @@ public class SignUp extends AppCompatActivity {
 
 
     public void SignUp() {
+
         root = FirebaseDatabase.getInstance();
         EditText emailEditText = findViewById(R.id.email_input);
         String email = emailEditText.getText().toString();
-        reference = root.getReference("users/"+email+"/email");
-        reference.setValue(email);
 
         EditText nameEditText = findViewById(R.id.name_input);
         String name = nameEditText.getText().toString();
-        reference = root.getReference("users/"+email+"/name");
-        reference.setValue(name);
 
         EditText ageEditText = findViewById(R.id.age_input);
         String age = ageEditText.getText().toString();
-        reference = root.getReference("users/"+email+"/age");
-        reference.setValue(age);
 
         EditText statusEditText = findViewById(R.id.status_input);
         String status = statusEditText.getText().toString();
-        reference = root.getReference("users/"+email+"/status");
-        reference.setValue(status);
 
+        User u = new User (name, age, email, status);
+        addUser(u);
         Intent intent = new Intent(this, home.class);
         startActivity(intent);
+    }
+
+    private void addUser(User u) {
+        String id = u.getID();
+        reference = root.getReference("users/"+id+"/email");
+        reference.setValue(u.email);
+        reference = root.getReference("users/"+id+"/name");
+        reference.setValue(u.name);
+        reference = root.getReference("users/"+id+"/age");
+        reference.setValue(u.age);
+        reference = root.getReference("users/"+id+"/status");
+        reference.setValue(u.status);
     }
 }
