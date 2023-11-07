@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -63,54 +64,56 @@ public class friends extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                     User u = userSnapshot.getValue(User.class);
-                    if (u != null && ValidUser(u)) {
+                    if (u != null) {
                         members.add(u);
-                        //Create the text view first
-                        TextView tv = new TextView(context);
-                        tv.setLayoutParams(new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT));
-                        tv.setText(u.getName());
-                        tv.setTypeface(null, Typeface.BOLD);
-                        tv.setTextSize(30);
+                        if(ValidUser(u)) {
+                            //Create the text view first
+                            TextView tv = new TextView(context);
+                            tv.setLayoutParams(new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT));
+                            tv.setText(u.getName());
+                            tv.setTypeface(null, Typeface.BOLD);
+                            tv.setTextSize(30);
 
-                        line.addView(tv);
+                            line.addView(tv);
 
-                        // Create Button
-                        Button btn = new Button(context);
-                        btn.setLayoutParams(new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT));
-                        btn.setText("Add");
-                        btn.setTag(u.getEmail());
-                        btn.setTextSize(30);
-                        btn.setTextColor(Color.WHITE);
-                        btn.setPadding(10, 0, 10, 5);
-                        // Create LayoutParams with the desired margins
-                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT, // Width
-                                LinearLayout.LayoutParams.WRAP_CONTENT // Height
-                        );
+                            // Create Button
+                            Button btn = new Button(context);
+                            btn.setLayoutParams(new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT));
+                            btn.setText("Add");
+                            btn.setTag(u.getEmail());
+                            btn.setTextSize(30);
+                            btn.setTextColor(Color.WHITE);
+                            btn.setPadding(10, 0, 10, 5);
+                            // Create LayoutParams with the desired margins
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.WRAP_CONTENT, // Width
+                                    LinearLayout.LayoutParams.WRAP_CONTENT // Height
+                            );
 
-                        layoutParams.setMargins(10, 0, 10, 0); // Left, Top, Right, Bottom
-                        btn.setHeight(55);
+                            layoutParams.setMargins(10, 0, 10, 0); // Left, Top, Right, Bottom
+                            btn.setHeight(55);
 
-                        // Set the LayoutParams for the button
-                        btn.setLayoutParams(layoutParams);
-                        ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.main_color));
+                            // Set the LayoutParams for the button
+                            btn.setLayoutParams(layoutParams);
+                            ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.main_color));
 
-                        // Set the background color of the button
-                        btn.setBackgroundTintList(colorStateList);
-                        btn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                String friendName = (String) v.getTag();
-                                //Go to a meeting details view, passing in meeting and user ID
-                                AddFriend(friendName);
-                            }
-                        });
+                            // Set the background color of the button
+                            btn.setBackgroundTintList(colorStateList);
+                            btn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String friendName = (String) v.getTag();
+                                    //Go to a meeting details view, passing in meeting and user ID
+                                    AddFriend(friendName);
+                                }
+                            });
 
-                        line.addView(btn); // Add Button to LinearLayout
+                            line.addView(btn); // Add Button to LinearLayout
+                        }
                     }
                 }
             }
@@ -178,11 +181,11 @@ public class friends extends AppCompatActivity {
     }
 
     private void AddFriend(String userName) {
+        //Log.d("create", userName);
         currUser.AddFriend(userName);
         FirebaseDatabase root = FirebaseDatabase.getInstance();
         DatabaseReference reference = root.getReference("users/" + currUser.getEmail());
         reference.setValue(currUser);
-
         reference = root.getReference("users/" + userName);
         reference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -24,6 +24,7 @@ public class User {
         likesMusic = false;
         likesSports = false;
         friends = new ArrayList<>();
+        friends.add(name);
     }
     User(String oName, Integer oAge, String oEmail, String oType, String oPassword, Boolean oLikesReading, Boolean oLikesMusic, Boolean oLikesSports) {
         name = oName;
@@ -35,6 +36,7 @@ public class User {
         likesMusic = oLikesMusic;
         likesSports = oLikesSports;
         friends = new ArrayList<>();
+        friends.add(name);
     }
 
     // Getter methods
