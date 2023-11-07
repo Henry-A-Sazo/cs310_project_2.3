@@ -6,6 +6,8 @@ Instructions on how to open and run our project
 
 2. The user credentials are Username: ________ Password: ________
 
-3. Potential Problems
+3. Potential Problems:
+             When sending a friend the email invitation, we use the google gmail so there is a slight chance
+             you will have to log into a gmail in order to see the email message being sent and verified. 
 
-4. In order to run out app, we have just been hitting the run button and everything should run. 
+5. In order to run out app, we have just been hitting the run button and everything should run. 
