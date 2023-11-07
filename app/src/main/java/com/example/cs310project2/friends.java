@@ -18,14 +18,6 @@ public class friends extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
 
-        friends_btn = (Button) findViewById(R.id.friends_btn);
-        friends_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openFriends();
-            }
-        });
-
         meetings_btn = (Button) findViewById(R.id.meetings_btn);
         meetings_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,13 +43,9 @@ public class friends extends AppCompatActivity {
         });
     }
 
-    public void openFriends(){
-        Intent intent = new Intent(this, friends.class);
-        startActivity(intent);
-    }
 
     public void openMeetings(){
-        Intent intent = new Intent(this, meetings.class);
+        Intent intent = new Intent(this, home.class);
         startActivity(intent);
     }
     public void openProfile(){

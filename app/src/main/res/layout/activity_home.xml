@@ -26,7 +26,7 @@
             android:id="@+id/meetings_btn"
             android:layout_width="135dp"
             android:layout_height="wrap_content"
-            android:text="Create Meeting"
+            android:text="Create"
             android:textSize="20sp"/>
 
 

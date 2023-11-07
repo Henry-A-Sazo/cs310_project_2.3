@@ -20,8 +20,12 @@ public class profile extends AppCompatActivity {
 
     private User currUser;
     public Button update_btn;
+    public Button friends_btn;
+    public Button meetings_btn;
+    public Button profile_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         //get the current user information, and place it in the boxes
         Intent intent = getIntent();
         String username = intent.getStringExtra("user");
@@ -53,6 +57,23 @@ public class profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        friends_btn = (Button) findViewById(R.id.friends_btn);
+        friends_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFriends();
+            }
+        });
+
+        meetings_btn = (Button) findViewById(R.id.meetings_btn);
+        meetings_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMeetings();
+            }
+        });
+
+
         update_btn = (Button) findViewById(R.id.update_btn);
 
         update_btn.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +88,16 @@ public class profile extends AppCompatActivity {
     public void update_(){
         Intent intent = new Intent(this, update.class);
         intent.putExtra("user", currUser.getEmail());
+        startActivity(intent);
+    }
+
+    public void openFriends(){
+        Intent intent = new Intent(this, friends.class);
+        startActivity(intent);
+    }
+
+    public void openMeetings(){
+        Intent intent = new Intent(this, home.class);
         startActivity(intent);
     }
 }
