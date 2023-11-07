@@ -169,6 +169,14 @@ public class friends extends AppCompatActivity {
             }
         });
 
+        profile_btn = (Button) findViewById(R.id.profile_btn);
+        profile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openProfile();
+            }
+        });
+
     }
 
 
