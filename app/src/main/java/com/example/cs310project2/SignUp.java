@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.CheckBox;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +45,7 @@ public class SignUp extends AppCompatActivity {
 
     public void SignUp() {
         root = FirebaseDatabase.getInstance();
-        User test = new User("Test", 0, "Test", "Native", false, false, false);
+        User test = new User("Test", 0, "Test", "Native", "Pass", false, false, false);
         reference = root.getReference("users/"+test.getEmail());
         reference.setValue(test);
 
@@ -80,6 +82,27 @@ public class SignUp extends AppCompatActivity {
                 String status = statusEditText.getText().toString();
                 reference = root.getReference("users/" + username[0] + "/status");
                 reference.setValue(status);
+
+                EditText passwordEditText = findViewById(R.id.password_input);
+                String password = passwordEditText.getText().toString();
+                reference = root.getReference("users/" + username[0] + "/password");
+                reference.setValue(password);
+
+                CheckBox readingCheckBox = findViewById(R.id.reading_input);
+                boolean reading = readingCheckBox.isChecked();
+                reference = root.getReference("users/" + username[0] + "/reading");
+                reference.setValue(reading);
+
+                CheckBox musicCheckBox = findViewById(R.id.music_input);
+                boolean music = musicCheckBox.isChecked();
+                reference = root.getReference("users/" + username[0] + "/music");
+                reference.setValue(music);
+
+                CheckBox sportsCheckBox = findViewById(R.id.sports_input);
+                boolean sports = sportsCheckBox.isChecked();
+                reference = root.getReference("users/" + username[0] + "/sports");
+                reference.setValue(sports);
+
 
                 Intent intent = new Intent(this, home.class);
                 startActivity(intent);
