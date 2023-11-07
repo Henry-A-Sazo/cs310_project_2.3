@@ -51,6 +51,7 @@ public class meetings extends AppCompatActivity {
             meeting m = new meeting(userName, location, time, topic);
             AddToDatabase(m);
             Intent intent = new Intent(this, home.class);
+            intent.putExtra("user", userName);
             startActivity(intent);
         } else {//meeting could not be created
 

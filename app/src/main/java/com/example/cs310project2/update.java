@@ -102,6 +102,7 @@ public class update extends AppCompatActivity {
         CheckBox sports_ = findViewById(R.id.music);
         Boolean likesSports = sports_.isChecked();
 
+        reference = root.getReference("users/"+currUser.getEmail());
         User temp = new User(currUser.getName(), age, currUser.getEmail(), type, password, likesMusic, likesReading, likesSports);
         reference.setValue(temp);
 
