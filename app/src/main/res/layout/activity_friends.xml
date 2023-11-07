@@ -86,7 +86,7 @@
                 <Button
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:id="@+id/add_friend1"
                     android:layout_marginEnd="10dp"
                     android:text="Add"
@@ -96,7 +96,7 @@
                 <Button
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:id="@+id/remove_friend1"
                     android:layout_marginEnd="10dp"
                     android:text="Remove"
@@ -120,7 +120,7 @@
                 <Button
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:id="@+id/add_friend2"
                     android:layout_marginEnd="10dp"
                     android:text="Add"
@@ -130,7 +130,7 @@
                 <Button
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:id="@+id/remove_friend2"
                     android:layout_marginEnd="10dp"
                     android:text="Remove"
@@ -154,7 +154,7 @@
                 <Button
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:id="@+id/add_friend3"
                     android:layout_marginEnd="10dp"
                     android:text="Add"
@@ -164,7 +164,7 @@
                 <Button
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:id="@+id/remove_friend3"
                     android:layout_marginEnd="10dp"
                     android:text="Remove"
@@ -188,7 +188,7 @@
                 <Button
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:id="@+id/add_friend4"
                     android:layout_marginEnd="10dp"
                     android:text="Add"
@@ -198,7 +198,7 @@
                 <Button
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="45dp"
                     android:id="@+id/remove_friend4"
                     android:layout_marginEnd="10dp"
                     android:text="Remove"
@@ -208,7 +208,7 @@
             </LinearLayout>
 
             <Button
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/invite_fr"
