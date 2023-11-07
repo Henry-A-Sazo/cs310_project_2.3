@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.util.Log;
@@ -57,12 +58,44 @@ public class update extends AppCompatActivity {
     private void update_() {//save to database
         EditText ageEditText = findViewById(R.id.age_input);
         String ageString = ageEditText.getText().toString();
-        Integer age = Integer.parseInt(ageString);
+        int age;
+
+        while (true) {
+            try {
+                age = Integer.parseInt(ageString);
+                // Input is a valid integer, break the loop
+                break;
+            } catch (NumberFormatException e) {
+                ageEditText.setError("Please enter a valid number");
+                ageEditText.requestFocus();
+                ageEditText.setText(""); // Clear the input for the next attempt
+                return; // To prevent further processing if the input is not valid
+            }
+        }
+
         EditText typeEditText = findViewById(R.id.status_input);
         String type = typeEditText.getText().toString();
-        Boolean likesMusic = false;
-        Boolean likesReading = false;
-        Boolean likesSports = false;
+
+        while (true) {
+            if (type.equalsIgnoreCase("native") || type.equalsIgnoreCase("international")) {
+                break; // Input is valid, exit the loop
+            } else {
+                typeEditText.setError("Please enter 'Native' or 'International'");
+                typeEditText.requestFocus();
+                typeEditText.setText(""); // Clear the input for the next attempt
+                return; // To prevent further processing if the input is not valid
+            }
+        }
+
+        CheckBox music_ = findViewById(R.id.music);
+        Boolean likesMusic = music_.isChecked();
+
+        CheckBox read_ = findViewById(R.id.music);
+        Boolean likesReading = read_.isChecked();
+
+        CheckBox sports_ = findViewById(R.id.music);
+        Boolean likesSports = sports_.isChecked();
+
         User temp = new User(currUser.getName(), age, currUser.getEmail(), type, likesMusic, likesReading, likesSports);
         reference.setValue(temp);
 
