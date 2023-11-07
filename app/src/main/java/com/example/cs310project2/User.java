@@ -12,7 +12,7 @@ public class User {
     private Boolean likesReading;
     private Boolean likesMusic;
     private Boolean likesSports;
-    private ArrayList<User> friends;
+    private ArrayList<String> friends;
 
     User() {//default constructor
         name = "";
@@ -70,7 +70,11 @@ public class User {
         return likesSports;
     }
 
-    public ArrayList<User> getFriends() {
+    public ArrayList<String> getFriends() {
         return new ArrayList<>(friends); // Return a copy of the friends list to prevent external modifications
+    }
+
+    public void AddFriend(String friend) {
+        friends.add(friend);
     }
 }

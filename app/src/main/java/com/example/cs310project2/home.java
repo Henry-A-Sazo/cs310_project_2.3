@@ -67,7 +67,6 @@ public class home extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int count = 0;
                 for (DataSnapshot meetingSnapshot : snapshot.getChildren()) {
                     meeting m = meetingSnapshot.getValue(meeting.class);
                     if (m != null) {
