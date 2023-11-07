@@ -88,7 +88,7 @@ public class home extends AppCompatActivity {
                         btn.setLayoutParams(new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT));
-                        btn.setText("See Meeting Details");
+                        btn.setText("Meeting Details");
                         btn.setTag(m.getID());
                         btn.setTextSize(30);
                         btn.setTextColor(Color.WHITE);
