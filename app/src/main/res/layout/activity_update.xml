@@ -100,17 +100,20 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reading"/>
+                    android:text="Reading"
+                    android:id="@+id/reading"/>
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Music"/>
+                    android:text="Music"
+                    android:id="@+id/music"/>/>
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sports"/>
+                    android:text="Sports"
+                    android:id="@+id/sports"/>/>
             </LinearLayout>
 
             <Button
