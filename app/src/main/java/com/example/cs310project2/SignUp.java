@@ -45,9 +45,6 @@ public class SignUp extends AppCompatActivity {
 
     public void SignUp() {
         root = FirebaseDatabase.getInstance();
-        User test = new User("Test", 0, "Test", "Native", "Pass", false, false, false);
-        reference = root.getReference("users/"+test.getEmail());
-        reference.setValue(test);
 
         String[] inChar = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "<", ">", ":", ";", "{", "}", "[", "]"};
         boolean containsInvalidCharacter = false;
@@ -57,7 +54,7 @@ public class SignUp extends AppCompatActivity {
         String email = emailEditText.getText().toString();
 
         String[] username = email.split("@");
-        reference = root.getReference("users/" + username[0] + "/email");
+        reference = root.getReference("users/" + username[0]);
 
         for (String invalid : inChar) {
             if (email.contains(invalid)) {
@@ -65,48 +62,36 @@ public class SignUp extends AppCompatActivity {
                 break;
             }
         }
-            if (username[1].equals("usc.edu") && containsInvalidCharacter == false) {
-                reference.setValue(email);
+        if (username[1].equals("usc.edu") && containsInvalidCharacter == false) {
 
-                EditText nameEditText = findViewById(R.id.name_input);
-                String name = nameEditText.getText().toString();
-                reference = root.getReference("users/" + username[0] + "/name");
-                reference.setValue(name);
+            EditText nameEditText = findViewById(R.id.name_input);
+            String name = nameEditText.getText().toString();
 
-                EditText ageEditText = findViewById(R.id.age_input);
-                String age = ageEditText.getText().toString();
-                reference = root.getReference("users/" + username[0] + "/age");
-                reference.setValue(age);
+            EditText ageEditText = findViewById(R.id.age_input);
+            int age = Integer.valueOf(ageEditText.getText().toString());
 
-                EditText statusEditText = findViewById(R.id.status_input);
-                String status = statusEditText.getText().toString();
-                reference = root.getReference("users/" + username[0] + "/status");
-                reference.setValue(status);
+            EditText statusEditText = findViewById(R.id.status_input);
+            String status = statusEditText.getText().toString();
 
-                EditText passwordEditText = findViewById(R.id.password_input);
-                String password = passwordEditText.getText().toString();
-                reference = root.getReference("users/" + username[0] + "/password");
-                reference.setValue(password);
+            EditText passwordEditText = findViewById(R.id.password_input);
+            String password = passwordEditText.getText().toString();
 
-                CheckBox readingCheckBox = findViewById(R.id.reading_input);
-                boolean reading = readingCheckBox.isChecked();
-                reference = root.getReference("users/" + username[0] + "/reading");
-                reference.setValue(reading);
+            CheckBox readingCheckBox = findViewById(R.id.reading_input);
+            boolean reading = readingCheckBox.isChecked();
 
-                CheckBox musicCheckBox = findViewById(R.id.music_input);
-                boolean music = musicCheckBox.isChecked();
-                reference = root.getReference("users/" + username[0] + "/music");
-                reference.setValue(music);
+            CheckBox musicCheckBox = findViewById(R.id.music_input);
+            boolean music = musicCheckBox.isChecked();
 
-                CheckBox sportsCheckBox = findViewById(R.id.sports_input);
-                boolean sports = sportsCheckBox.isChecked();
-                reference = root.getReference("users/" + username[0] + "/sports");
-                reference.setValue(sports);
+            CheckBox sportsCheckBox = findViewById(R.id.sports_input);
+            boolean sports = sportsCheckBox.isChecked();
 
 
-                Intent intent = new Intent(this, home.class);
-                startActivity(intent);
-            }
-        //}
+            User temp = new User(name, age, username[0], status, password, reading, music, sports);
+            reference.setValue(temp);
+
+            Intent intent = new Intent(this, home.class);
+            intent.putExtra("user", temp.getEmail());
+            startActivity(intent);
+        }
     }
 }
