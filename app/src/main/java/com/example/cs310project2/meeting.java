@@ -15,8 +15,8 @@ public class meeting {
 
 
     //Constructor
-    meeting(/*String creator,*/ String oLocation, String oTime, String oTopic) {
-        host = /*creator*/ "";
+    meeting(String creator, String oLocation, String oTime, String oTopic) {
+        host = creator;
         location = oLocation;
         time = oTime;
         topic = oTopic;
@@ -55,30 +55,25 @@ public class meeting {
         return id;
     }
 
-    public void joinMeeting(String user) {
+    public boolean joinMeeting(String user) {
+        if(members.contains(user)) {//check if the array already contains the user
+            return false;
+        }
         members.add(user);
+        return true;
     }
 
-    public void leaveMeeting(String user) {
+    public boolean leaveMeeting(String user) {
+        if(!members.contains(user)) {//no user, cannot remove
+            return false;
+        }
         members.remove(user);
-        if(user.equals(host) && members.size() > 0) { //set the host to the next available user, else set to null
+        if(user.equals(host) && members.size() > 0) { //set the host to the next available user, else set to empty string
             host = members.get(0);
         } else if(user.equals(host)) {
             host = "";
         }
-    }
 
-    public void updateMeeting(String user, String newTime, String newLocation, String newTopic) {
-        if(user.equals(host)) {
-            if(!newTime.equals("")) {
-                time = newTime;
-            }
-            if(!newLocation.equals("")) {
-                location = newLocation;
-            }
-            if(!newTopic.equals("")) {
-                topic = newTopic;
-            }
-        }
+        return true;
     }
 }

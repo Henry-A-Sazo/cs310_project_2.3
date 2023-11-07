@@ -15,11 +15,16 @@ public class meetings extends AppCompatActivity {
 
     private Button create_btn;
 
+    private String userName;
+
     private FirebaseDatabase root;
     private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("user");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meetings);
 
@@ -43,7 +48,7 @@ public class meetings extends AppCompatActivity {
         EditText topicEditText = findViewById(R.id.topic_input);
         String topic = topicEditText.getText().toString();
         if(validateInfo(location, time, topic)) {
-            meeting m = new meeting(location, time, topic);
+            meeting m = new meeting(userName, location, time, topic);
             AddToDatabase(m);
             Intent intent = new Intent(this, home.class);
             startActivity(intent);
