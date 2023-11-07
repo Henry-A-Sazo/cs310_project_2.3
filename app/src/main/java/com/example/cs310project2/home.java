@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View; // Add this import
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.*;
 import android.widget.Toast; // Add this import
 
 
@@ -30,63 +32,69 @@ import java.util.List;
 
 public class home extends AppCompatActivity {
 
-
+    private User currUser;
     public ArrayList<meeting> meetingsList;
     public Button friends_btn;
     public Button meetings_btn;
     public Button profile_btn;
 
 
-    public Button meeting1;
-    public Button meeting2;
-    public Button meeting3;
-    public Button meeting4;
-
-
     TextView[] topicTextViews = new TextView[4]; // Array to hold the topic TextViews
     Button[] meetingButtons = new Button[4]; // Array to hold the meeting detail Buttons
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
 
-
+        LinearLayout line = (LinearLayout) findViewById(R.id.line);
         //get all the meetings from the database
         meetingsList = new ArrayList<>();
         FirebaseDatabase root = FirebaseDatabase.getInstance();
         DatabaseReference reference = root.getReference("meetings");
+        Context context = this;
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int count = 1;
+                int count = 0;
                 for (DataSnapshot meetingSnapshot : snapshot.getChildren()) {
                     meeting m = meetingSnapshot.getValue(meeting.class);
                     if (m != null) {
                         meetingsList.add(m);
-                        String topicId = "topic" + count;
-                        String meetingId = "meeting_" + count;
-                        int topicTextViewId = getResources().getIdentifier(topicId, "id", getPackageName());
-                        int meetingButtonId = getResources().getIdentifier(meetingId, "id", getPackageName());
+                        TextView tv = new TextView(context);
+                        tv.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT));
+                        tv.setText(m.getTopic());
 
-                        TextView topicTextView = (TextView) findViewById(topicTextViewId);
-                        topicTextView.setText(m.getTopic() + count);
+                        // Add the TextView to the LinearLayout
+                        line.addView(tv);
 
-                        Button meetingButton = (Button) findViewById(meetingButtonId);
-                        meetingButton.setText("Meeting details " + count);
-
-//                        count++;
+                        // Create Button
+                        Button btn = new Button(context);
+                        btn.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT));
+                        btn.setText("See Meeting Details");
+                        btn.setTag(m.getID());
+                        btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String meetingId = (String) v.getTag();
+                                //Go to a meeting details view, passing in meeting and user ID
+                                openDetails(meetingId);
+                            }
+                        });
+                        line.addView(btn); // Add Button to LinearLayout
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
 
         friends_btn = (Button) findViewById(R.id.friends_btn);
         friends_btn.setOnClickListener(new View.OnClickListener() {
@@ -113,85 +121,31 @@ public class home extends AppCompatActivity {
                 openProfile();
             }
         });
-
-
-        meeting1 = (Button) findViewById(R.id.meeting_1);
-        meeting1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                meeting1_open();
-            }
-        });
-
-
-        meeting2 = (Button) findViewById(R.id.meeting_2);
-        meeting2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                meeting2_open();
-            }
-        });
-
-
-        meeting3 = (Button) findViewById(R.id.meeting_3);
-        meeting3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                meeting3_open();
-            }
-        });
-
-
-        meeting4 = (Button) findViewById(R.id.meeting_4);
-        meeting4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                meeting4_open();
-            }
-        });
-
-
     }
 
 
-    public void openFriends(){
+    public void openFriends() {
         Intent intent = new Intent(this, friends.class);
         startActivity(intent);
     }
 
 
-    public void openMeetings(){
+    public void openMeetings() {
         Intent intent = new Intent(this, meetings.class);
         startActivity(intent);
     }
-    public void openProfile(){
+
+    public void openProfile() {
         Intent intent = new Intent(this, profile.class);
         intent.putExtra("user", "Test");
         startActivity(intent);
     }
 
-
-    //opening the meetings
-    public void meeting1_open(){
+    public void openDetails(String Id) {
         Intent intent = new Intent(this, metting1.class);
+        intent.putExtra("id", Id);
+        //intent.putExtra("user", currUser.getEmail());
         startActivity(intent);
     }
 
-
-    public void meeting2_open(){
-        Intent intent = new Intent(this, meeting2.class);
-        startActivity(intent);
-    }
-
-
-    public void meeting3_open(){
-        Intent intent = new Intent(this, meeting3.class);
-        startActivity(intent);
-    }
-
-
-    public void meeting4_open(){
-        Intent intent = new Intent(this, meeting4.class);
-        startActivity(intent);
-    }
 }

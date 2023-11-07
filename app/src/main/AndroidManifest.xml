@@ -16,15 +16,6 @@
             android:name=".email"
             android:exported="false" />
         <activity
-            android:name=".meeting4"
-            android:exported="false" />
-        <activity
-            android:name=".meeting3"
-            android:exported="false" />
-        <activity
-            android:name=".meeting2"
-            android:exported="false" />
-        <activity
             android:name=".metting1"
             android:exported="false" />
         <activity
