@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("create", "test");
                     if (password.equals(currUser.getPassword())) {
                         Intent intent = new Intent(MainActivity.this, home.class);
-                        intent.putExtra("user", currUser.getEmail());
+                        intent.putExtra("user", "Test");
                         startActivity(intent);
                     }
                 }

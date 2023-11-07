@@ -176,7 +176,6 @@ public class friends extends AppCompatActivity {
                 openProfile();
             }
         });
-
     }
 
 
