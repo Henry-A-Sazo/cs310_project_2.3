@@ -138,7 +138,7 @@ public class friends extends AppCompatActivity {
                 ));
                 btn_i.setHeight(45);
                 btn_i.setText("Invite Friends");
-                btn_i.setTextSize(20);
+                btn_i.setTextSize(30);
                 btn_i.setTextColor(Color.WHITE);
                 btn_i.setPadding(10, 0, 10, 5);
 
