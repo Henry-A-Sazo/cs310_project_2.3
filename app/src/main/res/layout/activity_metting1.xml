@@ -61,7 +61,8 @@
                 android:text="Participants: Henry Sazo"
                 android:alpha="0.7"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:id="@+id/participants"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,7 +70,8 @@
                 android:text="Conversation Topic: Something"
                 android:alpha="0.7"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:id="@+id/topic"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -77,15 +79,17 @@
                 android:text="Time: 3:30pm"
                 android:alpha="0.7"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:id="@+id/time"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lication: SAL 101"
+                android:text="Location: SAL 101"
                 android:alpha="0.7"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:id="@+id/location"/>
 
             <Button
                 android:layout_marginTop="20dp"

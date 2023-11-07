@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View; // Add this import
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,7 +33,7 @@ import java.util.List;
 
 public class home extends AppCompatActivity {
 
-    private User currUser;
+    private String userName;
     public ArrayList<meeting> meetingsList;
     public Button friends_btn;
     public Button meetings_btn;
@@ -47,6 +48,11 @@ public class home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //set the current user
+        /*Intent intent = getIntent();
+        String userName = intent.getStringExtra("user");*/
+        userName = "Test";
 
         LinearLayout line = (LinearLayout) findViewById(R.id.line);
         //get all the meetings from the database
@@ -126,25 +132,27 @@ public class home extends AppCompatActivity {
 
     public void openFriends() {
         Intent intent = new Intent(this, friends.class);
+        intent.putExtra("user", userName);
         startActivity(intent);
     }
 
 
     public void openMeetings() {
         Intent intent = new Intent(this, meetings.class);
+        intent.putExtra("user", userName);
         startActivity(intent);
     }
 
     public void openProfile() {
         Intent intent = new Intent(this, profile.class);
-        intent.putExtra("user", "Test");
+        intent.putExtra("user", userName);
         startActivity(intent);
     }
 
     public void openDetails(String Id) {
         Intent intent = new Intent(this, metting1.class);
         intent.putExtra("id", Id);
-        //intent.putExtra("user", currUser.getEmail());
+        intent.putExtra("user", userName);
         startActivity(intent);
     }
 
