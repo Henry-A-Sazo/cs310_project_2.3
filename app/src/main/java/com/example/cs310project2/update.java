@@ -45,7 +45,7 @@ public class update extends AppCompatActivity {
             }
         });
 
-        update_btn = (Button) findViewById(R.id.sign_up_submit_btn);
+        update_btn = (Button) findViewById(R.id.submit_btn);
         update_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +59,7 @@ public class update extends AppCompatActivity {
         String ageString = ageEditText.getText().toString();
         Integer age = Integer.parseInt(ageString);
         EditText typeEditText = findViewById(R.id.status_input);
-        String type = typeEditText.toString();
+        String type = typeEditText.getText().toString();
         Boolean likesMusic = false;
         Boolean likesReading = false;
         Boolean likesSports = false;
