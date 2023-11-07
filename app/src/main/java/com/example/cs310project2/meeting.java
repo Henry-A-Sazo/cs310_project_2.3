@@ -13,6 +13,7 @@ public class meeting {
     private ArrayList<String> members;
     private final String id;
 
+
     //Constructor
     meeting(/*String creator,*/ String oLocation, String oTime, String oTopic) {
         host = /*creator*/ "";
