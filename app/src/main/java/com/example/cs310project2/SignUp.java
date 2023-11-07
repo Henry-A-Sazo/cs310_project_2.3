@@ -11,6 +11,11 @@ import android.widget.EditText;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SignUp extends AppCompatActivity {
 
     private FirebaseDatabase root;
@@ -41,27 +46,44 @@ public class SignUp extends AppCompatActivity {
         User test = new User("Test", 0, "Test", "Native", false, false, false);
         reference = root.getReference("users/"+test.getEmail());
         reference.setValue(test);
-        /*EditText emailEditText = findViewById(R.id.email_input);
+
+        String[] inChar = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "<", ">", ":", ";", "{", "}", "[", "]"};
+        boolean containsInvalidCharacter = false;
+
+
+        EditText emailEditText = findViewById(R.id.email_input);
         String email = emailEditText.getText().toString();
-        reference = root.getReference("users/"+email+"/email");
-        reference.setValue(email);
 
-        EditText nameEditText = findViewById(R.id.name_input);
-        String name = nameEditText.getText().toString();
-        reference = root.getReference("users/"+email+"/name");
-        reference.setValue(name);
+        String[] username = email.split("@");
+        reference = root.getReference("users/" + username[0] + "/email");
 
-        EditText ageEditText = findViewById(R.id.age_input);
-        String age = ageEditText.getText().toString();
-        reference = root.getReference("users/"+email+"/age");
-        reference.setValue(age);
+        for (String invalid : inChar) {
+            if (email.contains(invalid)) {
+                containsInvalidCharacter = true;
+                break;
+            }
+        }
+            if (username[1].equals("usc.edu") && containsInvalidCharacter == false) {
+                reference.setValue(email);
 
-        EditText statusEditText = findViewById(R.id.status_input);
-        String status = statusEditText.getText().toString();
-        reference = root.getReference("users/"+email+"/status");
-        reference.setValue(status);*/
+                EditText nameEditText = findViewById(R.id.name_input);
+                String name = nameEditText.getText().toString();
+                reference = root.getReference("users/" + username[0] + "/name");
+                reference.setValue(name);
 
-        Intent intent = new Intent(this, home.class);
-        startActivity(intent);
+                EditText ageEditText = findViewById(R.id.age_input);
+                String age = ageEditText.getText().toString();
+                reference = root.getReference("users/" + username[0] + "/age");
+                reference.setValue(age);
+
+                EditText statusEditText = findViewById(R.id.status_input);
+                String status = statusEditText.getText().toString();
+                reference = root.getReference("users/" + username[0] + "/status");
+                reference.setValue(status);
+
+                Intent intent = new Intent(this, home.class);
+                startActivity(intent);
+            }
+        //}
     }
 }
