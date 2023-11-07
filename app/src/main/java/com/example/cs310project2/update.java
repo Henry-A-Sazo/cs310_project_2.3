@@ -59,7 +59,7 @@ public class update extends AppCompatActivity {
         String ageString = ageEditText.getText().toString();
         Integer age = Integer.parseInt(ageString);
         EditText typeEditText = findViewById(R.id.status_input);
-        String type = typeEditText.toString();
+        String type = typeEditText.getText().toString();
         Boolean likesMusic = false;
         Boolean likesReading = false;
         Boolean likesSports = false;
