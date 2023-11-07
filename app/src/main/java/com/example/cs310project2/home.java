@@ -3,10 +3,13 @@ package com.example.cs310project2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -75,6 +78,7 @@ public class home extends AppCompatActivity {
                                 LinearLayout.LayoutParams.WRAP_CONTENT));
                         tv.setText(m.getTopic());
                         tv.setTypeface(null, Typeface.BOLD);
+                        tv.setTextSize(30);
 
                         // Add the TextView to the LinearLayout
                         line.addView(tv);
@@ -86,6 +90,24 @@ public class home extends AppCompatActivity {
                                 LinearLayout.LayoutParams.WRAP_CONTENT));
                         btn.setText("See Meeting Details");
                         btn.setTag(m.getID());
+                        btn.setTextSize(30);
+                        btn.setTextColor(Color.WHITE);
+                        btn.setPadding(10,0,10,5);
+                        // Create LayoutParams with the desired margins
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT, // Width
+                                LinearLayout.LayoutParams.WRAP_CONTENT // Height
+                        );
+
+                        layoutParams.setMargins(10, 0, 10, 0); // Left, Top, Right, Bottom
+                        btn.setHeight(55);
+
+                        // Set the LayoutParams for the button
+                        btn.setLayoutParams(layoutParams);
+                        ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.main_color));
+
+                        // Set the background color of the button
+                        btn.setBackgroundTintList(colorStateList);
                         btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -94,6 +116,7 @@ public class home extends AppCompatActivity {
                                 openDetails(meetingId);
                             }
                         });
+
                         line.addView(btn); // Add Button to LinearLayout
                     }
                 }
