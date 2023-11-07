@@ -35,9 +35,8 @@ public class friends extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
         //set the current user
-        /*Intent intent = getIntent();
-        String userName = intent.getStringExtra("user");*/
-        userName = "Test";
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("user");
 
         LinearLayout line = (LinearLayout) findViewById(R.id.line);
         //get all the meetings from the database
@@ -175,14 +174,17 @@ public class friends extends AppCompatActivity {
 
     public void openMeetings(){
         Intent intent = new Intent(this, home.class);
+        intent.putExtra("user", userName);
         startActivity(intent);
     }
     public void openProfile(){
         Intent intent = new Intent(this, profile.class);
+        intent.putExtra("user", userName);
         startActivity(intent);
     }
     public void invitation(){
         Intent intent = new Intent(this, email.class);
+        intent.putExtra("user", userName);
         startActivity(intent);
     }
 
