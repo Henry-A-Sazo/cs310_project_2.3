@@ -38,7 +38,10 @@ public class SignUp extends AppCompatActivity {
 
     public void SignUp() {
         root = FirebaseDatabase.getInstance();
-        EditText emailEditText = findViewById(R.id.email_input);
+        User test = new User("Test", 0, "Test", "Native", false, false, false);
+        reference = root.getReference("users/"+test.getEmail());
+        reference.setValue(test);
+        /*EditText emailEditText = findViewById(R.id.email_input);
         String email = emailEditText.getText().toString();
         reference = root.getReference("users/"+email+"/email");
         reference.setValue(email);
@@ -56,7 +59,7 @@ public class SignUp extends AppCompatActivity {
         EditText statusEditText = findViewById(R.id.status_input);
         String status = statusEditText.getText().toString();
         reference = root.getReference("users/"+email+"/status");
-        reference.setValue(status);
+        reference.setValue(status);*/
 
         Intent intent = new Intent(this, home.class);
         startActivity(intent);
