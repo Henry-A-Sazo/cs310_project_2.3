@@ -1,14 +1,17 @@
 package com.example.cs310project2;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.CheckBox;
+import android.widget.*;
+import android.util.Log;
+import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,16 +59,14 @@ public class MainActivity extends AppCompatActivity {
     public void openHome(){
         EditText emailEditText = findViewById(R.id.si_email_input);
         String email = emailEditText.getText().toString();
-        //reference = root.getReference("users/" + username[0] + "/name");
         String[] username = email.split("@");
 
         EditText passwordEditText = findViewById(R.id.si_password_input);
         String password = passwordEditText.getText().toString();
-        //reference = root.getReference("users/" + username[0] + "/name");
 
 
         FirebaseDatabase root = FirebaseDatabase.getInstance();
-        DatabaseReference reference = root.getReference("users/" + username);
+        DatabaseReference reference = root.getReference("users/" + username[0]);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -75,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
                 if(currUser != null) {
                     Log.d("create", "test");
                     if (password.equals(currUser.getPassword())) {
-
+                        Intent intent = new Intent(MainActivity.this, home.class);
+                        intent.putExtra("user", currUser.getEmail());
+                        startActivity(intent);
                     }
                 }
             }
