@@ -11,6 +11,7 @@ public class friends extends AppCompatActivity {
     public Button friends_btn;
     public Button meetings_btn;
     public Button profile_btn;
+    public Button invite_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,14 @@ public class friends extends AppCompatActivity {
                 openProfile();
             }
         });
+
+        invite_btn = (Button) findViewById(R.id.invite_fr);
+        invite_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                invitation();
+            }
+        });
     }
 
     public void openFriends(){
@@ -55,4 +64,9 @@ public class friends extends AppCompatActivity {
         Intent intent = new Intent(this, profile.class);
         startActivity(intent);
     }
+    public void invitation(){
+        Intent intent = new Intent(this, email.class);
+        startActivity(intent);
+    }
+
 }
