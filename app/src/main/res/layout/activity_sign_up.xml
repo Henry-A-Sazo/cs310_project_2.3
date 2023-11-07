@@ -119,16 +119,19 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/reading_input"
                     android:text="Reading"/>
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/music_input"
                     android:text="Music"/>
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/sports_input"
                     android:text="Sports"/>
             </LinearLayout>
 

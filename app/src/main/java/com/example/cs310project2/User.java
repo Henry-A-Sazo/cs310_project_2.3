@@ -7,6 +7,7 @@ public class User {
     private Integer age;
     private String email;
     private String type;
+    private String password;
 
     private Boolean likesReading;
     private Boolean likesMusic;
@@ -18,16 +19,18 @@ public class User {
         age = 0;
         email = "";
         type = "Native";
+        password = "";
         likesReading = false;
         likesMusic = false;
         likesSports = false;
         friends = new ArrayList<>();
     }
-    User(String oName, Integer oAge, String oEmail, String oType, Boolean oLikesReading, Boolean oLikesMusic, Boolean oLikesSports) {
+    User(String oName, Integer oAge, String oEmail, String oType, String oPassword, Boolean oLikesReading, Boolean oLikesMusic, Boolean oLikesSports) {
         name = oName;
         age = oAge;
         email = oEmail;
         type = oType;
+        password = oPassword;
         likesReading = oLikesReading;
         likesMusic = oLikesMusic;
         likesSports = oLikesSports;
@@ -49,6 +52,10 @@ public class User {
 
     public String getType() {
         return type;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public Boolean getLikesReading() {
