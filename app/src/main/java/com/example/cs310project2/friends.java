@@ -203,7 +203,7 @@ public class friends extends AppCompatActivity {
     }
 
     private boolean ValidUser(User friend) {
-        if(currUser.getEmail() == friend.getEmail()) {
+        if(currUser.getEmail().equals(friend.getEmail())) {
             return false;
         }
         if(currUser.getFriends().contains(friend.getEmail())) {
