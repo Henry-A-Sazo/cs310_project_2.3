@@ -55,16 +55,14 @@ public class friends extends AppCompatActivity {
 
         LinearLayout line = (LinearLayout) findViewById(R.id.friends);
         //get all the meetings from the database
-        members = new ArrayList<>();
         reference = root.getReference("users");
         Context context = this;
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                     User u = userSnapshot.getValue(User.class);
                     if (u != null) {
-                        members.add(u);
                         if(ValidUser(u)) {
                             //Create the text view first
                             TextView tv = new TextView(context);
@@ -108,6 +106,54 @@ public class friends extends AppCompatActivity {
                                     String friendName = (String) v.getTag();
                                     //Go to a meeting details view, passing in meeting and user ID
                                     AddFriend(friendName);
+                                }
+                            });
+
+                            line.addView(btn); // Add Button to LinearLayout
+                        } else if(currUser.getFriends().contains(u.getEmail())) {//current user and u are friends
+                            Log.d("create", "football friend");
+                            //Create the text view first
+                            TextView tv = new TextView(context);
+                            tv.setLayoutParams(new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT));
+                            tv.setText(u.getName());
+                            tv.setTypeface(null, Typeface.BOLD);
+                            tv.setTextSize(30);
+
+                            line.addView(tv);
+
+                            // Create Button
+                            Button btn = new Button(context);
+                            btn.setLayoutParams(new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT));
+                            btn.setText("Remove");
+                            btn.setTag(u.getEmail());
+                            btn.setTextSize(30);
+                            btn.setTextColor(Color.WHITE);
+                            btn.setPadding(10, 0, 10, 5);
+                            // Create LayoutParams with the desired margins
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.WRAP_CONTENT, // Width
+                                    LinearLayout.LayoutParams.WRAP_CONTENT // Height
+                            );
+
+                            layoutParams.setMargins(10, 0, 10, 0); // Left, Top, Right, Bottom
+                            btn.setHeight(55);
+
+                            // Set the LayoutParams for the button
+                            btn.setLayoutParams(layoutParams);
+                            ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.main_color));
+
+                            // Set the background color of the button
+                            btn.setBackgroundTintList(colorStateList);
+                            btn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String friendName = (String) v.getTag();
+                                    //Go to a meeting details view, passing in meeting and user ID
+                                    RemoveFriend(friendName);
                                 }
                             });
 
@@ -182,10 +228,6 @@ public class friends extends AppCompatActivity {
     private void AddFriend(String userName) {
         //Log.d("create", userName);
         currUser.AddFriend(userName);
-        Log.d("create", "curr: \n");
-        for(int i = 0; i < currUser.getFriends().size(); i++) {
-            Log.d("create", currUser.getFriends().get(i));
-        }
         FirebaseDatabase root = FirebaseDatabase.getInstance();
         DatabaseReference reference = root.getReference("users/" + currUser.getEmail());
         reference.setValue(currUser);
@@ -197,6 +239,9 @@ public class friends extends AppCompatActivity {
                 if(other != null) {
                     other.AddFriend(currUser.getEmail());
                     reference2.setValue(other);
+                    Intent intent = new Intent(friends.this, friends.class);
+                    intent.putExtra("user", currUser.getEmail());
+                    startActivity(intent);
                 }
             }
             @Override
@@ -205,10 +250,32 @@ public class friends extends AppCompatActivity {
         });
 
 
-        //refresh the page
-        Intent intent = new Intent(this, friends.class);
-        intent.putExtra("user", currUser.getEmail());
-        startActivity(intent);
+    }
+
+
+    private void RemoveFriend(String userName) {
+        //Log.d("create", userName);
+        currUser.RemoveFriend(userName);
+        FirebaseDatabase root = FirebaseDatabase.getInstance();
+        DatabaseReference reference = root.getReference("users/" + currUser.getEmail());
+        reference.setValue(currUser);
+        DatabaseReference reference2 = root.getReference("users/" + userName);
+        reference2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User other = snapshot.getValue(User.class);
+                if(other != null) {
+                    other.RemoveFriend(currUser.getEmail());
+                    reference2.setValue(other);
+                    Intent intent = new Intent(friends.this, friends.class);
+                    intent.putExtra("user", currUser.getEmail());
+                    startActivity(intent);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     private boolean ValidUser(User friend) {
@@ -230,5 +297,8 @@ public class friends extends AppCompatActivity {
 
         return false;
     }
+
+    //Return the user for testing purposes
+    public User getUser() {return currUser;}
 
 }
