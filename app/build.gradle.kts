@@ -50,4 +50,5 @@ dependencies {
     implementation("com.sun.mail:android-activation:1.6.6")
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:rules:1.4.0")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.4.0")
 }

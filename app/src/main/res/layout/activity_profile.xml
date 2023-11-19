@@ -73,7 +73,8 @@
                 android:text="Profile"
                 android:textColor="@color/main_color"
                 android:textSize="32sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:id="@+id/profile_unique"/>
 
 
             <View

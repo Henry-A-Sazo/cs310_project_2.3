@@ -65,7 +65,7 @@ public Button send_btn;
         send_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*sendEmail();*/ sendInvite();
+                sendEmail(); /* sendInvite(); */
             }
         });
     }
@@ -84,7 +84,7 @@ public Button send_btn;
         String username = recipientEmail;
         reference = root.getReference("users/" + username);
 
-        User temp = new User("", 0, username, "Narive", password, false, false, false);
+        User temp = new User("", 0, username, "Native", password, false, false, false);
         reference.setValue(temp);
 
         // Create an intent to send the email
@@ -99,6 +99,9 @@ public Button send_btn;
             // Handle the case where no email app is installed.
             // You can display a message to the user or take other actions.
         }
+        Intent intent = new Intent(this, friends.class);
+        intent.putExtra("user", currUser.getEmail());
+        startActivity(intent);
     }
     public void sendInvite(){
 

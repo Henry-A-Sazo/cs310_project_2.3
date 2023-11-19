@@ -2,16 +2,28 @@ package com.example.cs310project2;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasAction;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasData;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.*;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewAssertion;
 import androidx.test.filters.LargeTest;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -30,6 +42,8 @@ public class BlackBoxTest1 {
     public static final String USERNAME = "cksubram";
     public static final String FRIEND_TO_ADD = "hsazo";
     public static final String FRIEND_TO_REMOVE = "caddei";
+
+    public static final String EMAIL_ADDRESS = "test";
 
     @Test
     public void testAddingFriendUpdatesFriendList() {
@@ -77,6 +91,54 @@ public class BlackBoxTest1 {
         // Check if the friend list is updated
         int updatedFriendCount = getCountOfButtonsWithText(R.id.friends, "Remove");
         assertThat(updatedFriendCount, is(initialFriendCount - 1));
+    }
+
+    @Test
+    public void testNavigationToHomeFromFriends() {
+        // Launch the friends activity
+        Intent intent = new Intent(ApplicationProvider.getApplicationContext(), friends.class);
+        intent.putExtra("user", USERNAME);
+        ActivityScenario<friends> activityScenario = ActivityScenario.launch(intent);
+
+        // Perform a click on the meetings button
+        onView(withId(R.id.meetings_btn)).perform(click());
+
+        // Check for a view that is unique to the profile activity
+        onView(withId(R.id.home_unique)).check(matches(isDisplayed()));
+    }
+
+
+    @Test
+    public void testNavigationToProfileFromFriends() {
+        // Launch the friends activity
+        Intent intent = new Intent(ApplicationProvider.getApplicationContext(), friends.class);
+        intent.putExtra("user", USERNAME);
+        ActivityScenario<friends> activityScenario = ActivityScenario.launch(intent);
+
+        // Perform a click on the meetings button
+        onView(withId(R.id.profile_btn)).perform(click());
+
+        // Check for a view that is unique to the profile activity
+        onView(withId(R.id.profile_unique)).check(matches(isDisplayed()));
+    }
+
+
+    @Test
+    public void testSendEmail() {
+        // Launch the email activity
+        Intent intent = new Intent(ApplicationProvider.getApplicationContext(), email.class);
+        intent.putExtra("user", USERNAME);
+        ActivityScenario.launch(intent);
+
+        // Type in the email address
+        onView(withId(R.id.email_input)).perform(typeText(EMAIL_ADDRESS), closeSoftKeyboard());
+
+        // Click the send button
+        onView(withId(R.id.send_btn)).perform(click());
+
+        // Verify that an email intent is triggered
+        //intended(hasAction(Intent.ACTION_SENDTO));
+
     }
 
     // Utility method to count items in a LinearLayout

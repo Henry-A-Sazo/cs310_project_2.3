@@ -24,10 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class friends extends AppCompatActivity {
-    public Button friends_btn;
     public Button meetings_btn;
     public Button profile_btn;
-    public Button invite_btn;
     private User currUser;
     public ArrayList<User> members;
 
