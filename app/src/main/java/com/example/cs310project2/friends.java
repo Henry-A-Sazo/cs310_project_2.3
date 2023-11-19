@@ -29,7 +29,6 @@ public class friends extends AppCompatActivity {
     public Button profile_btn;
     public Button invite_btn;
     private User currUser;
-    private User other;
     public ArrayList<User> members;
 
     @Override
@@ -183,23 +182,33 @@ public class friends extends AppCompatActivity {
     private void AddFriend(String userName) {
         //Log.d("create", userName);
         currUser.AddFriend(userName);
+        Log.d("create", "curr: \n");
+        for(int i = 0; i < currUser.getFriends().size(); i++) {
+            Log.d("create", currUser.getFriends().get(i));
+        }
         FirebaseDatabase root = FirebaseDatabase.getInstance();
         DatabaseReference reference = root.getReference("users/" + currUser.getEmail());
         reference.setValue(currUser);
-        reference = root.getReference("users/" + userName);
-        reference.addValueEventListener(new ValueEventListener() {
+        DatabaseReference reference2 = root.getReference("users/" + userName);
+        reference2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                other = snapshot.getValue(User.class);
+                User other = snapshot.getValue(User.class);
+                if(other != null) {
+                    other.AddFriend(currUser.getEmail());
+                    reference2.setValue(other);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
-        other.AddFriend(currUser.getEmail());
-        reference.setValue(other);
 
+        //refresh the page
+        Intent intent = new Intent(this, friends.class);
+        intent.putExtra("user", currUser.getEmail());
+        startActivity(intent);
     }
 
     private boolean ValidUser(User friend) {

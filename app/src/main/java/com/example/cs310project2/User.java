@@ -76,7 +76,6 @@ public class User {
         return new ArrayList<>(friends); // Return a copy of the friends list to prevent external modifications
     }
 
-    public void AddFriend(String friend) {
-        friends.add(friend);
+    public void AddFriend(String friend) { friends.add(friend);
     }
 }
