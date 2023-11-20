@@ -36,6 +36,7 @@ public class meeting {
     }
 
     //basic getters and functions for the meeting
+    public String getHost() {return host;}
     public String getLocation() {
         return location;
     }
