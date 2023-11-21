@@ -23,7 +23,7 @@ public class WhiteBoxTest3 {
         assertEquals("12:00", testMeeting.getTime());
         assertEquals("Test2", testMeeting.getTopic());
         testMeeting.leaveMeeting("Test User");
-        assertEquals(true, testMeeting.getMembers().contains("Test User"));
+        assertEquals(false, testMeeting.getMembers().contains("Test User"));
         assertEquals(0, testMeeting.getMembers().size());
     }
     @Test
@@ -40,7 +40,7 @@ public class WhiteBoxTest3 {
         assertEquals(true, testMeeting.getMembers().contains("Test User"));
         assertEquals(1, testMeeting.getMembers().size());
         testMeeting.leaveMeeting("Test User");
-        assertEquals(true, testMeeting.getMembers().contains("Test User"));
+        assertEquals(false, testMeeting.getMembers().contains("Test User"));
         assertEquals(0, testMeeting.getMembers().size());
 
     }
