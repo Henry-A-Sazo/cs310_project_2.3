@@ -29,7 +29,6 @@ public class profile extends AppCompatActivity {
         //get the current user information, and place it in the boxes
         Intent intent = getIntent();
         String username = intent.getStringExtra("user");
-        Log.d("create", username);
 
         FirebaseDatabase root = FirebaseDatabase.getInstance();
         DatabaseReference reference = root.getReference("users/" + username);
