@@ -1,15 +1,15 @@
 package com.example.cs310project2;
-        import androidx.test.espresso.Espresso;
-        import androidx.test.espresso.action.ViewActions;
-        import androidx.test.espresso.matcher.ViewMatchers;
-        import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
         //import androidx.test.rule.ActivityTestRule;
 
-        import org.junit.Rule;
-        import org.junit.Test;
-        import org.junit.runner.RunWith;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-        import java.util.regex.Pattern;
+import java.util.regex.Pattern;
 
 public class BlackBoxTest2 {
 //    @Rule
@@ -17,7 +17,6 @@ public class BlackBoxTest2 {
 
     @Test
     public void testEmailInput() {
-        // Replace R.id.editText with the actual ID of your EditText widget
         String emailInput = "hsazo@usc.edu";
         Espresso.onView(ViewMatchers.withId(R.id.si_email_input))
                 .perform(ViewActions.typeText(emailInput))
@@ -28,7 +27,6 @@ public class BlackBoxTest2 {
 
     @Test
     public void testPasswordInput() {
-        // Replace R.id.editText with the actual ID of your EditText widget
         String emailInput = "1234";
         Espresso.onView(ViewMatchers.withId(R.id.si_password_input))
                 .perform(ViewActions.typeText(emailInput))
@@ -41,8 +39,6 @@ public class BlackBoxTest2 {
         // Button 1 Sign
         Espresso.onView(ViewMatchers.withId(R.id.signin))
                 .perform(ViewActions.click());
-
-        // Add assertions or additional actions after clicking button 1
 
         // Button 2 Sign up
         Espresso.onView(ViewMatchers.withId(R.id.signup_btn))
@@ -59,7 +55,7 @@ public class BlackBoxTest2 {
                 .perform(ViewActions.closeSoftKeyboard());
 
         // EditText 2
-        String text2 = "UpdateAge";
+        String text2 = "23";
         Espresso.onView(ViewMatchers.withId(R.id.age_input))
                 .perform(ViewActions.typeText(text2))
                 .perform(ViewActions.closeSoftKeyboard());
