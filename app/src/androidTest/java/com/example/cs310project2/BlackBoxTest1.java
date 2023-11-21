@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.*;
 
+import androidx.annotation.NonNull;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.Espresso;
@@ -34,6 +35,14 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.concurrent.CountDownLatch;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -133,7 +142,7 @@ public class BlackBoxTest1 {
 
 
     @Test
-    public void testSendEmail() {
+    public void testSendEmail() throws InterruptedException {
         // Launch the email activity
         Intent intent = new Intent(ApplicationProvider.getApplicationContext(), email.class);
         intent.putExtra("user", USERNAME);
@@ -147,6 +156,26 @@ public class BlackBoxTest1 {
 
         // Verify that an email intent is triggered
         //intended(hasAction(Intent.ACTION_SENDTO));
+
+        //verify that the user has been added to the db
+        FirebaseDatabase root = FirebaseDatabase.getInstance();
+        DatabaseReference reference = root.getReference("users/" + EMAIL_ADDRESS);
+        CountDownLatch latch = new CountDownLatch(1);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User currUser = snapshot.getValue(User.class);
+                latch.countDown(); // Decrement the latch count
+                assertEquals(EMAIL_ADDRESS, currUser.getEmail());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                fail("Firebase error: " + error.getMessage());
+                latch.countDown();
+            }
+        });
+
+        latch.await();
 
     }
 

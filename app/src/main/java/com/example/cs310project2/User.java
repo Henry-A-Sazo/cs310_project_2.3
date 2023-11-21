@@ -70,6 +70,13 @@ public class User {
         return likesSports;
     }
 
+    public void SetAge(int newAge) { age = newAge;}
+    public void SetPassword(String newPW) {password = newPW;}
+    public void SetType(String newType) {type = newType;}
+    public void SetLikesReading(Boolean newReading) {likesReading = newReading;}
+    public void SetLikesMusic(Boolean newMusic) {likesMusic = newMusic;}
+    public void SetLikesSports(Boolean newSports) {likesSports = newSports;}
+
     public ArrayList<String> getFriends() {
         return new ArrayList<>(friends); // Return a copy of the friends list to prevent external modifications
     }

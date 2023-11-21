@@ -61,33 +61,31 @@ public class WhiteBoxTest1 {
         assertEquals(0, testUser.getFriends().size());
     }
 
-    public void read_from_db() throws InterruptedException {
-        CountDownLatch latch = new CountDownLatch(1);
-        String userName = "cksubram";
-        FirebaseDatabase root = FirebaseDatabase.getInstance();
-        DatabaseReference reference = root.getReference("users/" + userName);
+    @Test
+    public void update_user() {
+        //Create a user, and check for default values
+        User testUser = new User();
+        assertEquals("", testUser.getName());
+        assertEquals(String.valueOf(0), String.valueOf(testUser.getAge()));
+        assertEquals("", testUser.getEmail());
+        assertEquals("Native", testUser.getType());
+        assertEquals("", testUser.getPassword());
+        assertEquals(false, testUser.getLikesReading());
+        assertEquals(false, testUser.getLikesMusic());
+        assertEquals(false, testUser.getLikesSports());
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User currUser = snapshot.getValue(User.class);
-                assertEquals("Carlos Subramanian", currUser.getName());
-                assertEquals(String.valueOf(22), String.valueOf(currUser.getAge()));
-                assertEquals("cksubram", currUser.getEmail());
-                assertEquals("Native Speaker", currUser.getType());
-                assertEquals("PW", currUser.getPassword());
-                assertEquals(true, currUser.getLikesReading());
-                assertEquals(true, currUser.getLikesMusic());
-                assertEquals(true, currUser.getLikesSports());
-                latch.countDown(); // Decrement the latch count
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                fail("Firebase error: " + error.getMessage());
-                latch.countDown();
-            }
-        });
-
-        latch.await(); // Wait for the latch to reach zero
+        //update the user's values and make sure they are the updated ones
+        testUser.SetAge(10);
+        testUser.SetType("International");
+        testUser.SetPassword("PW");
+        testUser.SetLikesReading(true);
+        testUser.SetLikesMusic(true);
+        testUser.SetLikesSports(true);
+        assertEquals(String.valueOf(10), String.valueOf(testUser.getAge()));
+        assertEquals("International", testUser.getType());
+        assertEquals("PW", testUser.getPassword());
+        assertEquals(true, testUser.getLikesReading());
+        assertEquals(true, testUser.getLikesMusic());
+        assertEquals(true, testUser.getLikesSports());
     }
 }
