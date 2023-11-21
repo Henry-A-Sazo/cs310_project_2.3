@@ -6,6 +6,10 @@ import android.widget.Button;
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Random;
 
 
@@ -36,13 +40,21 @@ public class email extends AppCompatActivity {
 
         int code = generateRandom4DigitNumber();
         String subject = "Invitation to Talk2Friends";
-        String message = "Hello Friend,\nPlease enter this code "+ code+ " as your password and your current email to join our app!"+
+        String message = "Hello Friend,\nPlease enter this code "+ code + " as your password and your current email to join our app!"+
                 "\n\n Best, \n Talk2Friends Team";
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_EMAIL, recipients);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, message);
+
+
+        FirebaseDatabase root = FirebaseDatabase.getInstance();
+        for(int i = 0; i < recipients.length; i++) {
+            DatabaseReference reference = root.getReference("users/" + recipients[i]);
+            User friend = new User("Name", 0, recipients[i], "Native Speaker", Integer.toString(code), true, true, true);
+            reference.setValue(friend);
+        }
 
         intent.setType("message/rfc822");
         startActivity(Intent.createChooser(intent, "Choose an email client"));
