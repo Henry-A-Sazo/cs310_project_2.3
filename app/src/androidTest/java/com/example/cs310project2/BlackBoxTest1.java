@@ -22,6 +22,7 @@ import android.widget.*;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.espresso.Espresso;
 import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewAssertion;
@@ -54,7 +55,7 @@ public class BlackBoxTest1 {
         int initialFriendCount = getCountOfButtonsWithText(R.id.friends, "Add");
 
         // Add a new friend
-        onView(allOf(withText("Add"), withTagValue(is((Object) FRIEND_TO_ADD))))
+        Espresso.onView(allOf(withText("Add"), withTagValue(is((Object) FRIEND_TO_ADD))))
                 .perform(click());
 
         // Wait for a short period to ensure the friend list is updated
@@ -67,6 +68,10 @@ public class BlackBoxTest1 {
         // Check if the friend list is updated
         int updatedFriendCount = getCountOfButtonsWithText(R.id.friends, "Add");
         assertThat(updatedFriendCount, is(initialFriendCount - 1));
+
+        //remove friend to return to old state
+        Espresso.onView(allOf(withText("Remove"), withTagValue(is((Object) FRIEND_TO_ADD))))
+                .perform(click());
     }
 
     @Test
@@ -78,7 +83,7 @@ public class BlackBoxTest1 {
         int initialFriendCount = getCountOfButtonsWithText(R.id.friends, "Remove");
 
         // Add a new friend
-        onView(allOf(withText("Remove"), withTagValue(is((Object) FRIEND_TO_REMOVE))))
+        Espresso.onView(allOf(withText("Remove"), withTagValue(is((Object) FRIEND_TO_REMOVE))))
                 .perform(click());
 
         // Wait for a short period to ensure the friend list is updated
@@ -91,6 +96,10 @@ public class BlackBoxTest1 {
         // Check if the friend list is updated
         int updatedFriendCount = getCountOfButtonsWithText(R.id.friends, "Remove");
         assertThat(updatedFriendCount, is(initialFriendCount - 1));
+
+        //add friend to return to old state
+        Espresso.onView(allOf(withText("Add"), withTagValue(is((Object) FRIEND_TO_REMOVE))))
+                .perform(click());
     }
 
     @Test
@@ -101,10 +110,10 @@ public class BlackBoxTest1 {
         ActivityScenario<friends> activityScenario = ActivityScenario.launch(intent);
 
         // Perform a click on the meetings button
-        onView(withId(R.id.meetings_btn)).perform(click());
+        Espresso.onView(withId(R.id.meetings_btn)).perform(click());
 
         // Check for a view that is unique to the profile activity
-        onView(withId(R.id.home_unique)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.id.home_unique)).check(matches(isDisplayed()));
     }
 
 
@@ -116,10 +125,10 @@ public class BlackBoxTest1 {
         ActivityScenario<friends> activityScenario = ActivityScenario.launch(intent);
 
         // Perform a click on the meetings button
-        onView(withId(R.id.profile_btn)).perform(click());
+        Espresso.onView(withId(R.id.profile_btn)).perform(click());
 
         // Check for a view that is unique to the profile activity
-        onView(withId(R.id.profile_unique)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.id.profile_unique)).check(matches(isDisplayed()));
     }
 
 
@@ -128,13 +137,13 @@ public class BlackBoxTest1 {
         // Launch the email activity
         Intent intent = new Intent(ApplicationProvider.getApplicationContext(), email.class);
         intent.putExtra("user", USERNAME);
-        ActivityScenario.launch(intent);
+        ActivityScenario<email> activityScenario = ActivityScenario.launch(intent);
 
         // Type in the email address
-        onView(withId(R.id.email_input)).perform(typeText(EMAIL_ADDRESS), closeSoftKeyboard());
+        Espresso.onView(withId(R.id.email_input)).perform(typeText(EMAIL_ADDRESS), closeSoftKeyboard());
 
         // Click the send button
-        onView(withId(R.id.send_btn)).perform(click());
+        Espresso.onView(withId(R.id.send_btn)).perform(click());
 
         // Verify that an email intent is triggered
         //intended(hasAction(Intent.ACTION_SENDTO));
@@ -145,7 +154,7 @@ public class BlackBoxTest1 {
     // Utility method to count buttons with a specific text in a LinearLayout
     private int getCountOfButtonsWithText(int linearLayoutId, String buttonText) {
         final int[] count = {0};
-        onView(withId(linearLayoutId)).check(new ViewAssertion() {
+        Espresso.onView(withId(linearLayoutId)).check(new ViewAssertion() {
             @Override
             public void check(View view, NoMatchingViewException noViewFoundException) {
                 if (noViewFoundException != null) {
