@@ -40,6 +40,19 @@ public class update extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 currUser = snapshot.getValue(User.class);
+                EditText pass = (EditText) findViewById(R.id.password_input);
+                pass.setText(currUser.getPassword());
+                EditText age = (EditText) findViewById(R.id.age_input);
+                age.setText(Integer.toString(currUser.getAge()));
+                EditText status = (EditText) findViewById(R.id.status_input);
+                status.setText(currUser.getType());
+
+                CheckBox read = (CheckBox) findViewById(R.id.reading);
+                read.setChecked(currUser.getLikesReading());
+                CheckBox music = (CheckBox) findViewById(R.id.music);
+                music.setChecked(currUser.getLikesMusic());
+                CheckBox sport = (CheckBox) findViewById(R.id.sports);
+                sport.setChecked(currUser.getLikesSports());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
