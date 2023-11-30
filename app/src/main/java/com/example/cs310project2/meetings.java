@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 public class meetings extends AppCompatActivity {
 
     private Button create_btn;
+    private Button back_btn;
 
     private String userName;
 
@@ -37,6 +38,20 @@ public class meetings extends AppCompatActivity {
                 CreateMeeting();
             }
         });
+
+        back_btn = (Button) findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backHome();
+            }
+        });
+    }
+
+    private void backHome(){
+        Intent intent = new Intent(this, home.class);
+        intent.putExtra("user", userName);
+        startActivity(intent);
     }
 
     private void CreateMeeting() {

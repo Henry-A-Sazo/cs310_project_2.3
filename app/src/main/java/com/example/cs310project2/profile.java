@@ -22,13 +22,15 @@ public class profile extends AppCompatActivity {
     public Button update_btn;
     public Button friends_btn;
     public Button meetings_btn;
-    public Button profile_btn;
+    public Button back_btn;
+
+    public String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         //get the current user information, and place it in the boxes
         Intent intent = getIntent();
-        String username = intent.getStringExtra("user");
+        username = intent.getStringExtra("user");
 
         FirebaseDatabase root = FirebaseDatabase.getInstance();
         DatabaseReference reference = root.getReference("users/" + username);
@@ -81,6 +83,21 @@ public class profile extends AppCompatActivity {
                 update_();
             }
         });
+
+        back_btn = (Button) findViewById(R.id.back_btn);
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backHome();
+            }
+        });
+    }
+
+    private void backHome(){
+        Intent intent = new Intent(this, home.class);
+        intent.putExtra("user", username);
+        startActivity(intent);
     }
 
 
