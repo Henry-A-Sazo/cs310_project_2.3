@@ -23,12 +23,15 @@ public class metting1 extends AppCompatActivity {
 
     private Button join_btn;
     private Button leave_btn;
+    private Button back_btn;
+
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //set the current user and meeting
         Intent intent = getIntent();
-        String userName = intent.getStringExtra("user");
+        userName = intent.getStringExtra("user");
         String mID = intent.getStringExtra("id");
 
         //get the user first
@@ -93,6 +96,21 @@ public class metting1 extends AppCompatActivity {
                 LeaveMeeting();
             }
         });
+
+        back_btn = (Button) findViewById(R.id.back_btn);
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backHome();
+            }
+        });
+    }
+
+    private void backHome(){
+        Intent intent = new Intent(this, home.class);
+        intent.putExtra("user", userName);
+        startActivity(intent);
     }
 
     private void JoinMeeting() {//function to add a user to the current meeting

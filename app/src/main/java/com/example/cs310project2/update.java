@@ -24,7 +24,10 @@ public class update extends AppCompatActivity {
     private FirebaseDatabase root;
     private DatabaseReference reference;
 
+    private String userName;
+
     public Button update_btn;
+    public Button back_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +35,7 @@ public class update extends AppCompatActivity {
 
         //get the current user information, and place it in the boxes
         Intent intent = getIntent();
-        String userName = intent.getStringExtra("user");
+        userName = intent.getStringExtra("user");
         root = FirebaseDatabase.getInstance();
         reference = root.getReference("users/" + userName);
 
@@ -66,6 +69,21 @@ public class update extends AppCompatActivity {
                 update_();
             }
         });
+
+        back_btn = (Button) findViewById(R.id.back_btn);
+        back_btn = (Button) findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backHome();
+            }
+        });
+    }
+
+    private void backHome(){
+        Intent intent = new Intent(this, profile.class);
+        intent.putExtra("user", userName);
+        startActivity(intent);
     }
 
     private void update_() {//save to database

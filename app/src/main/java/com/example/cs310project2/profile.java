@@ -84,20 +84,7 @@ public class profile extends AppCompatActivity {
             }
         });
 
-        back_btn = (Button) findViewById(R.id.back_btn);
 
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                backHome();
-            }
-        });
-    }
-
-    private void backHome(){
-        Intent intent = new Intent(this, home.class);
-        intent.putExtra("user", username);
-        startActivity(intent);
     }
 
 
