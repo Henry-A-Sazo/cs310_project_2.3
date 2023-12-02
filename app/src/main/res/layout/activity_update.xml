@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/back_btn"
                 android:layout_marginBottom="20dp"
-                android:text="Home"
+                android:text="Back to Profile"
                 android:textSize="30dp"/>
 
 
