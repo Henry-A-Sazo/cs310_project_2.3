@@ -73,7 +73,7 @@ public class SignUp extends AppCompatActivity {
             EditText statusEditText = findViewById(R.id.status_input);
             String status = statusEditText.getText().toString();
 
-            EditText passwordEditText = findViewById(R.id.password_input);
+            EditText passwordEditText = findViewById(R.id.si_password_input);
             String password = passwordEditText.getText().toString();
 
             CheckBox readingCheckBox = findViewById(R.id.reading_input);

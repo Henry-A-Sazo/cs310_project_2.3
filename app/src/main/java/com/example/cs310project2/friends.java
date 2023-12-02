@@ -52,6 +52,7 @@ public class friends extends AppCompatActivity {
         });
 
         LinearLayout line = (LinearLayout) findViewById(R.id.friends);
+        LinearLayout sug = (LinearLayout) findViewById(R.id.suggestions);
         //get all the meetings from the database
         reference = root.getReference("users");
         Context context = this;
@@ -71,7 +72,7 @@ public class friends extends AppCompatActivity {
                             tv.setTypeface(null, Typeface.BOLD);
                             tv.setTextSize(30);
 
-                            line.addView(tv);
+                            sug.addView(tv);
 
                             // Create Button
                             Button btn = new Button(context);
@@ -107,7 +108,7 @@ public class friends extends AppCompatActivity {
                                 }
                             });
 
-                            line.addView(btn); // Add Button to LinearLayout
+                            sug.addView(btn); // Add Button to LinearLayout
                         } else if(currUser.getFriends().contains(u.getEmail())) {//current user and u are friends
                             Log.d("create", "football friend");
                             //Create the text view first

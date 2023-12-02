@@ -43,7 +43,7 @@ public class update extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 currUser = snapshot.getValue(User.class);
-                EditText pass = (EditText) findViewById(R.id.password_input);
+                EditText pass = (EditText) findViewById(R.id.si_password_input);
                 pass.setText(currUser.getPassword());
                 EditText age = (EditText) findViewById(R.id.age_input);
                 age.setText(Integer.toString(currUser.getAge()));
@@ -87,7 +87,7 @@ public class update extends AppCompatActivity {
     }
 
     private void update_() {//save to database
-        EditText pass = findViewById(R.id.password_input);
+        EditText pass = findViewById(R.id.si_password_input);
         String password = pass.getText().toString();
         if (password == ""){
             password = currUser.getPassword();
